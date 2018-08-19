@@ -1,0 +1,230 @@
+@import "//fonts.googleapis.com/css?family=Roboto+Condensed:400,700&subset=latin";
+*,
+*:before,
+*:after {
+    box-model: border-box;
+}
+
+body {
+    color: #333;
+    font: 20px/1.5 "Roboto Condensed", sans-serif;
+    background: #eee;
+    min-width: 420px;
+}
+
+form,
+fieldset,
+legend {
+    padding: 0;
+    margin: 0;
+}
+
+form {
+    width: 50%;
+    margin: 50px auto;
+    overflow: hidden;
+}
+
+fieldset {
+    margin: 60px 0;
+    position: relative;
+    border: 1px solid #ddd;
+}
+
+legend {
+    font-weight: 600;
+    position: absolute;
+    top: -40px;
+    border: 0;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+label {
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    display: block;
+    padding: 15px 10px 15px 50px;
+    position: relative;
+    border-top: 1px solid #ddd;
+    background: white;
+    whitespace: no-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.15s ease;
+}
+
+label:first-of-type {
+    border: 0;
+}
+
+label:before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #d0d0d0;
+}
+
+label span {
+    color: #b7b7b7;
+    font-weight: normal;
+    position: absolute;
+    left: 35%;
+}
+
+label strong {
+    color: #00aeef;
+    text-align: right;
+    float: right;
+}
+
+label:focus,
+label:hover,
+label:active,
+input:checked+label {
+    color: white;
+    background: #00aeef;
+    border-color: white;
+}
+
+label:focus span,
+label:hover span,
+label:active span,
+input:checked+label span,
+label:focus strong,
+label:hover strong,
+label:active strong,
+input:checked+label strong {
+    color: white;
+}
+
+label:focus:before,
+label:hover:before,
+label:active:before,
+input:checked+label:before {
+    left: 13px;
+    top: 13px;
+    width: 12px;
+    height: 12px;
+    border: 4px solid white;
+    background: #00aeef;
+}
+
+.most-chosen:after {
+    content: "MOST CHOSEN";
+    color: white;
+    font-size: 12px;
+    font-weight: normal;
+    background: #333;
+    position: absolute;
+    right: 12%;
+    top: 13px;
+    display: block;
+    padding: 5px 7px;
+}
+
+button {
+    color: white;
+    background: #00aeef;
+    border: 0;
+    padding: 10px 15px;
+    float: right;
+}
+
+button:focus,
+button:hover,
+button:active {
+    background: #333;
+    outline: 0;
+}
+
+p {
+    color: #666;
+}
+
+a {
+    color: #00aeef;
+}
+
+.footer {
+    text-align: center;
+}
+
+@media all and (max-width: 1000px) {
+    .most-chosen:after {
+        content: none;
+    }
+}
+
+@media all and (max-width: 800px) {
+    label {
+        padding-bottom: 35px;
+    }
+    label:before {
+        top: 25px;
+    }
+    label span {
+        font-size: 14px;
+        display: block;
+        margin-top: 5px;
+        left: auto;
+    }
+    input:checked+label:before,
+    label:focus:before,
+    label:active:before,
+    label:hover:before {
+        top: 24px;
+    }
+    button {
+        width: 100%;
+        float: none;
+    }
+}
+
+@media all and (max-width: 550px) {
+    label {
+        padding: 15px 10px 15px 50px;
+    }
+    label:before {
+        left: 14px;
+        top: 14px;
+    }
+    label span {
+        display: none;
+    }
+    input:checked+label:before,
+    label:focus:before,
+    label:active:before,
+    label:hover:before {
+        left: 13px;
+        top: 13px;
+    }
+}
+
+select.custom-dropdown {
+    width: 100%;
+    min-height: 50px;
+    margin: 0px;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+}
+
+label:before {
+    border-radius: 0;
+}
+
+h1.product-title {
+    text-align: center;
+    font-size: 2em;
+    text-decoration: underline;
+}
