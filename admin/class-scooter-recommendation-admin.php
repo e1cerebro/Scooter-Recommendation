@@ -192,7 +192,16 @@ public function add_plugin_admin_menu() {
 
 		add_submenu_page( 
 						"uchenna-scooter-recommendation",
-						"scooter-recommendation-settings",
+						"Scooter Recommendation Submissions",
+						"Submissions",
+						"manage_options",
+						"scooter-recommendation-submissions",
+						array($this, 'scooter_recommendation_submissions')
+					);
+
+		add_submenu_page( 
+						"uchenna-scooter-recommendation",
+						"Scooter Recommendation Settings",
 						"Settings",
 						"manage_options",
 						"scooter-recommendation-settings",
@@ -207,6 +216,17 @@ public function add_plugin_admin_menu() {
 						"manage_options",
 						"scooter-recommendation-view",
 						array($this, 'view_scooter_details')
+		);
+
+
+	// Page to view a single scooter Submission
+		add_submenu_page( 
+						"uchenna-scooter-recommendation",
+						"",
+						"",
+						"manage_options",
+						"scooter-recommendation-single-submission-view",
+						array($this, 'scooter_recommendation_single_submissions')
 		);
 
 
@@ -245,18 +265,73 @@ public function view_scooter_details() {
  * @since    1.0.0
  */
 
-public function display_plugin_setup_page() {
-    include_once( 'partials/scooter-recommendation-admin-display.php' );
-}
+		public function display_plugin_setup_page() {
+			include_once( 'partials/scooter-recommendation-admin-display.php' );
+		}
 
-public function new_scooter_recommendation_admin() {
-    include_once( 'partials/new-scooter-recommendation-admin.php' );
-}
+		public function new_scooter_recommendation_admin() {
+			include_once( 'partials/new-scooter-recommendation-admin.php' );
+		}
 
 
-public function scooter_recommendation_settings() {
-    include_once( 'partials/new-scooter-recommendation-admin.php' );
-}
+		public function scooter_recommendation_settings() {
+			include_once( 'partials/scooter-recommendation-settings.php' );
+		}
+
+
+		public function scooter_recommendation_submissions() {
+			include_once( 'partials/scooter-recommendation-submissions.php' );
+		}
+
+
+		public function scooter_recommendation_single_submissions() {
+			include_once( 'partials/scooter-recommendation-single-submissions.php' );
+		}
+
+		public function scr_validate_settings($input) {
+			// create an array to save the inputs.      
+			$valid = array();
+		
+			//Validate the user inputs and add them to the array.
+			$valid['daily_use_title'] 			= sanitize_text_field($input['daily_use_title']);
+			$valid['daily_use'] 				= sanitize_text_field($input['daily_use']);
+			$valid['access_title']				= sanitize_text_field($input['access_title']);
+			$valid['access'] 					= sanitize_text_field($input['access']);
+			$valid['weight_range_title']		= sanitize_text_field($input['weight_range_title']);
+			$valid['weight_range'] 				= sanitize_text_field($input['weight_range']);
+			$valid['height_range_title'] 		= sanitize_text_field($input['height_range_title']);
+			$valid['height_range'] 				= sanitize_text_field($input['height_range']);
+			$valid['suspension_title'] 			= sanitize_text_field($input['suspension_title']);
+			$valid['suspension'] 				= sanitize_text_field($input['suspension']);
+			$valid['addition_question_title'] 	= sanitize_text_field($input['addition_question_title']);
+			$valid['addition_question'] 		= sanitize_text_field($input['addition_question']);
+			$valid['drivers_information_title'] = sanitize_text_field($input['drivers_information_title']);
+			$valid['drivers_information']		= sanitize_text_field($input['drivers_information']);
+		
+			return $valid;
+		 }
+
+
+		public function scr_validate_result_page_settings($input) {
+			// create an array to save the inputs.      
+			$valid = array();
+		
+			//Validate the user inputs and add them to the array.
+			$valid['result_title'] 			= sanitize_text_field($input['result_title']);
+			$valid['result_description'] 	= sanitize_text_field($input['result_description']);
+			$valid['result_not_found'] 		= sanitize_text_field($input['result_not_found']);
+			
+			return $valid;
+		 }
+
+
+		public function scr_result_page_settings_update() {
+			register_setting($this->plugin_name."-result-page-settings", $this->plugin_name."-result-page-settings", array($this, 'scr_validate_result_page_settings'));
+		}
+
+		 public function scr_options_update() {
+			register_setting($this->plugin_name, $this->plugin_name, array($this, 'scr_validate_settings'));
+		}
 
 	
 }

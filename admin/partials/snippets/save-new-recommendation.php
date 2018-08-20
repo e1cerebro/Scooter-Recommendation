@@ -27,7 +27,7 @@
         $from_5_5ft_6ft         =   $_POST['from_5_5ft_6ft'];
         $from_6ft_6_5ft         =   $_POST['from_6ft_6_5ft'];
         $more_than_6_5ft        =   $_POST['more_than_6_5ft'];
-        $suspension             =   $_POST['more_than_6_5ft'];
+        $suspension             =   $_POST['suspension'];
 
         //Check if the scooter already exists in the database
         $scooter_exists = $wpdb->get_results( "SELECT * FROM $table WHERE `product_id` = $product_id" );

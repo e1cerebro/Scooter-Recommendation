@@ -34,12 +34,29 @@ class Scooter_Recommendation_Activator {
 		
 		global $wpdb;
 		// creates my_table in database if not exists
-		$table = $wpdb->prefix . "my_table"; 
+
+		$table = $wpdb->prefix . "scooter_recommendation_submissions"; 
 		$charset_collate = $wpdb->get_charset_collate();
-		$sql = "CREATE TABLE IF NOT EXISTS $table (
-			`id` mediumint(9) NOT NULL AUTO_INCREMENT,
-			`name` text NOT NULL,
-		UNIQUE (`id`)
+		$sql = "CREATE TABLE IF NOT EXISTS $table ( 
+			    `id` int(11) NOT NULL AUTO_INCREMENT,
+				`drivers_name` varchar(225) DEFAULT NULL,
+				`drivers_email` varchar(225) DEFAULT NULL,
+				`drivers_phone` varchar(225) DEFAULT NULL,
+				`drivers_consent` varchar(225) DEFAULT NULL,
+				`custom_suggestion` varchar(225) DEFAULT NULL,
+ 				`at_home` varchar(225) DEFAULT NULL,
+				`around_town` varchar(225) DEFAULT NULL,
+				`traveling_portable` varchar(225) DEFAULT NULL,
+				`all_terrain` varchar(225) DEFAULT NULL,
+				`ramp` varchar(225) DEFAULT NULL,
+				`elevator` varchar(225) DEFAULT NULL,
+				`vertical_lift` varchar(225) DEFAULT NULL,
+				`stairs` varchar(225) DEFAULT NULL,
+				`weight_range` varchar(225) DEFAULT NULL,
+				`height_range` varchar(225) DEFAULT NULL,
+				`suspension` varchar(225) DEFAULT NULL,
+				`date_submitted` varchar(225) DEFAULT NULL,
+				PRIMARY KEY (`id`)
 		) $charset_collate;";
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $sql );

@@ -1,5 +1,4 @@
 (function($) {
-    'use strict';
 
     /**
      * All of the code for your public-facing JavaScript source
@@ -29,7 +28,15 @@
      * practising this, we should strive to set a better example in our own work.
      */
 
+    jQuery('div.driver-information').slideUp(10);
 
+    $('#additional-recommendation-yes').click(function() {
+        $('div.driver-information').slideDown();
+    });
+
+    $('#additional-recommendation-no').click(function() {
+        $('div.driver-information').slideUp(100);
+    });
 
 
 })(jQuery);

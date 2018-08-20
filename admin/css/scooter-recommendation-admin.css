@@ -10,3 +10,44 @@
     color: #fff;
     border-radius: 4px;
 }
+
+
+/* Single Submission View */
+
+.drivers-record {
+    width: 80%;
+    background-color: #fff;
+    margin: 20px auto;
+    padding: 30px;
+    text-align: center;
+}
+
+.drivers-record .subject {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.drivers-record .body {
+    font-size: 17px;
+}
+
+.text-upper {
+    text-transform: uppercase;
+}
+
+.text-center {
+    text-align: center;
+}
+
+a.admin-link {
+    text-decoration: none;
+}
+
+
+/* Settings Page */
+
+.settings-textarea {
+    width: 81%;
+    min-height: 109px;
+}

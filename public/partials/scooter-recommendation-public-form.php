@@ -29,10 +29,37 @@
                     return $imgUrls;
                 }
 		?>
+
+
+        <?php 
+
+             $options    = get_option($this->plugin_name);
+
+            $daily_use          = $options['daily_use'];
+            $daily_use_title    = $options['daily_use_title'];
+            $access             = $options['access'];
+            $access_title       = $options['access_title'];
+            $weight_range_title = $options['weight_range_title'];
+            $weight_range       = $options['weight_range'];
+            $height_range       = $options['height_range'];
+            $height_range_title = $options['height_range_title'];
+            $height_range_title = $options['height_range_title'];
+            $suspension         = $options['suspension'];
+            $suspension_title   = $options['suspension_title'];
+            $addition_question_title = $options['addition_question_title'];
+            $addition_question   = $options['addition_question'];
+            $drivers_information_title = $options['drivers_information_title'];
+            $drivers_information   = $options['drivers_information'];
+
+
+
+        ?>
 			<?php if($_POST['submit']): ?>
                 <?php 
-                     global $wpdb;
-                     $where_condition="";
+
+                    include_once( 'snippets/save-customer-recommendation.php' );
+
+                      $where_condition="";
                      $product_id             =   $_POST['product_id'];
 
                      $at_home                =   $_POST['at_home'];
@@ -184,10 +211,8 @@
                      ?>
                 <?php if(sizeof($scooters) != 0):?>
                     <div class="result-header">
-                        <h1 class="title">SEARCH RESULT</h1>
-                        <p class="sub-title">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi a ratione facere consequatur quis saepe aspernatur corrupti molestias aperiam, corporis accusamus debitis asperiores tenetur esse obcaecati inventore ducimus similique totam?
-                        </p>
+                        <h1 class="title"><?php _e(get_option($this->plugin_name."-result-page-settings")['result_title']); ?></h1>
+                        <p class="sub-title"><?php _e(get_option($this->plugin_name."-result-page-settings")['result_description']); ?></p>
                     </div>
                      <?php  foreach($scooters as $product): ?>
                      <?php
@@ -235,7 +260,7 @@
                     ?>
                     <div class="not-found">
                         <h3 class="message">
-                            Your search returned an empty result.
+                        <?php _e(get_option($this->plugin_name."-result-page-settings")['result_not_found']); ?>
                         </h3>
                         <p class="link">
                          <a href="<?php echo $httpReferer; ?>">Search Again</a>
@@ -252,9 +277,9 @@
             <form method="post" action="">
 			    <div class="form-section">
                     <div class="left-part">
-                        <h2>Daily Use</h2>
+                        <h2><?php _e($daily_use_title, $this->plugin_name); ?></h2>
                         <div class="description">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus quos veritatis similique sapiente perspiciatis enim vero sit officiis. Corrupti laborum saepe voluptate illo tempora veritatis modi molestias magni amet quisquam!
+                            <?php _e($daily_use, $this->plugin_name);?>
                         </div>
                     </div>
                     <div class="right-part">
@@ -298,10 +323,8 @@
 
                 <div class="form-section">
                     <div class="left-part">
-                        <h2>Acess</h2>
-                        <div class="description">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus quos veritatis similique sapiente perspiciatis enim vero sit officiis. Corrupti laborum saepe voluptate illo tempora veritatis modi molestias magni amet quisquam!
-                        </div>
+                        <h2><?php _e($access_title, $this->plugin_name); ?></h2>
+                        <div class="description"> <?php _e($access, $this->plugin_name); ?> </div>
                     </div>
                     <div class="right-part">
                        <div class="can-toggle can-toggle--size-small">
@@ -342,10 +365,8 @@
 
                  <div class="form-section">
                     <div class="left-part">
-                        <h2>Driver's Weight Range</h2>
-                        <div class="description">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus quos veritatis similique sapiente perspiciatis enim vero sit officiis. Corrupti laborum                                        
-                        </div>
+                        <h2><?php _e($weight_range_title, $this->plugin_name); ?></h2>
+                        <div class="description"> <?php _e($weight_range, $this->plugin_name); ?> </div>
                     </div>
                     <div class="right-part">
                              <div class="radio">
@@ -373,10 +394,8 @@
 
                  <div class="form-section">
                     <div class="left-part">
-                        <h2>Driver's Height Range</h2>
-                        <div class="description">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus quos veritatis similique sapiente perspiciatis enim vero sit officiis. Corrupti laborum                                        
-                        </div>
+                        <h2><?php _e($height_range_title, $this->plugin_name); ?></h2>
+                        <div class="description"> <?php _e($height_range, $this->plugin_name); ?> </div>
                     </div>
                     <div class="right-part">
 
@@ -411,10 +430,8 @@
                 <div class="form-section">
                     <div class="left-part">
 
-                        <h2>Suspension</h2>
-                        <div class="description">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus quos veritatis similique sapiente perspiciatis enim vero sit officiis. Corrupti laborum                                        
-                        </div>
+                        <h2><?php _e($suspension_title, $this->plugin_name); ?></h2>
+                        <div class="description"> <?php _e($suspension, $this->plugin_name); ?> </div>
                     </div>
                     <div class="right-part">
                         <div class="radio">
@@ -430,20 +447,42 @@
                     </div>
                 </div>
 
-
-                 <div class="form-section">
+                <div class="form-section">
                     <div class="left-part">
-                        <h2>Driver's Information</h2>
+
+                        <h2><?php _e($addition_question_title, $this->plugin_name); ?></h2>
                         <div class="description">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusamus quos veritatis similique sapiente perspiciatis enim vero sit officiis. Corrupti laborum                                      
+                        <?php _e($addition_question, $this->plugin_name); ?>
                         </div>
                     </div>
                     <div class="right-part">
-                            <input type="text" name="respondent-name" value="" size="40"   id="respondent-name"  placeholder="Enter Your Name">
+                   
+                        <div class="radio horizontal-radio">
+                            <input class="additional-recommendation" id="additional-recommendation-yes" name="additional-recommendation" type="radio" value="1"  >
+                            <label for="additional-recommendation-yes" id="additional-recommendation-yes-label" class="radio-label"><?php esc_attr_e( 'Yes please' , $this->plugin_name  ); ?></label>
+                        </div>
+
+                        <div class="radio horizontal-radio">
+                            <input class="additional-recommendation" id="additional-recommendation-no" name="additional-recommendation" type="radio" value="0" checked>
+                            <label for="additional-recommendation-no" class="radio-label"><?php esc_attr_e( 'No thank you, just automated suggestion' , $this->plugin_name  ); ?></label>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+                 <div class="form-section driver-information">
+                    <div class="left-part">
+                        <h2><?php _e($drivers_information_title, $this->plugin_name); ?></h2>
+                        <div class="description">
+                        <?php _e($drivers_information, $this->plugin_name); ?>                        </div>
+                         </div>
+                    <div class="right-part">
+                            <input type="text" name="drivers-name" value="" size="40"   id="drivers-name"  placeholder="Enter Your Name">
                             <br>
-                            <input type="email" name="respondent-email" value="" size="40"   id="respondent-email" placeholder="Enter Email Address">
+                            <input type="email" name="drivers-email" value="" size="40"   id="drivers-email" placeholder="Enter Email Address">
                            <br>
-                            <input type="tel" name="respondent-phone" value="" size="40"  id="respondent-phone"  placeholder="Enter Phone Number">
+                            <input type="tel" name="drivers-phone" value="" size="40"  id="drivers-phone"  placeholder="Enter Phone Number">
                             <p>
                                 Would you like us to give you a call back?
                             </p>
@@ -456,17 +495,9 @@
                                 <input id="consent-no" name="consent" type="radio" value="0"  checked>
                                 <label for="consent-no" class="radio-label"><?php esc_attr_e( 'No thank you' , $this->plugin_name  ); ?></label>
                             </div>
+                            
                         </div>
-                    
-                   
-
                 </div>
-
-                
-
-
-
-
 
                 <div class="form-bottom">
                     <button type="submit" class="submit-btn" value="Get Recommendation" name="submit">Get Recommendation</button>
