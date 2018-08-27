@@ -80,7 +80,6 @@ div#page_body label {
 
 .can-toggle label .can-toggle__label-text {
     flex: 1;
-    padding-left: 20px;
 }
 
 .can-toggle label .can-toggle__switch {
@@ -235,6 +234,7 @@ div#page_body label {
     height: 28px;
     flex: 0 0 90px;
     border-radius: 2px;
+    width: 18%;
 }
 
 .can-toggle.can-toggle--size-small label .can-toggle__switch:before {
@@ -468,4 +468,25 @@ div#page_body label {
 
 .can-toggle.demo-rebrand-2 label .can-toggle__switch:hover:after {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Feedback button */
+
+button.feedback {
+    font-size: 12px !important;
+    padding-right: 21px !important;
+    padding-left: 21px !important;
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    background-color: #00b9eb;
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    padding-right: 28px;
+    padding-left: 28px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    border: 1px solid #fff;
 }

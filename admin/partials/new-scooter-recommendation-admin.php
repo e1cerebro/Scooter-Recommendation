@@ -13,36 +13,33 @@
  */
 ?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
-
-
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
  <?php
 
-  // Configure the args to fetch all the products from the database wp_posts table
-  $args = array( 
-                'ignore_sticky_posts' => 1,
-                'posts_per_page'      => -1,
-                'post_type'           => 'product',
-                'post_status'         => 'publish', 
-                'orderby' => 'post_title',
-                'order' => 'ASC'
-                );
+        // Configure the args to fetch all the products from the database wp_posts table
+        $args = array( 
+                        'ignore_sticky_posts' => 1,
+                        'posts_per_page'      => -1,
+                        'post_type'           => 'product',
+                        'post_status'         => 'publish', 
+                        'orderby' => 'post_title',
+                        'order' => 'ASC'
+                        );
 
-   /* Initialize the query object */
-  $the_query = new WP_Query( $args );
+        /* Initialize the query object */
+        $the_query = new WP_Query( $args );
 
-  /* Fetch all the posts */
-  $products  = $the_query->get_posts();
+        /* Fetch all the posts */
+        $products  = $the_query->get_posts();
 
  ?>
 
 <div class="wrap" id="app">
-<?php 
-    if($_POST['submit']){
-        include_once( 'snippets/save-new-recommendation.php' );
-    } 
-?>
+    <?php 
+        //If the submit button is clicked include the file to save the user data
+        if($_POST['submit']){
+            include_once( 'snippets/new-scooter/save-new-recommendation.php' );
+        } 
+    ?>
     <div id="page_body">
                     
             <h1>Add New Scooter</h1>
@@ -53,7 +50,7 @@
                 <select  @click="greet" name="default_role" id="default_role">     
                 <option value="">Select Scooter</option>
                 <?php foreach($products as $product): ?>
-                <option value="<?php echo  $product->guid; ?>|<?php echo  $product->ID; ?>"><?php echo  $product->post_title; ?></option>
+                <option value="<?php echo  esc_attr_e($product->guid); ?>|<?php echo  esc_attr_e($product->ID); ?>"><?php echo  esc_attr_e($product->post_title); ?></option>
                 <?php endforeach;?>
                 </select>
             </fieldset>
@@ -65,7 +62,6 @@
 
             <h2><?php esc_attr_e( 'Daily Use', $this->plugin_name ); ?></h2>
 
-          
             <div class="can-toggle can-toggle--size-small">
                 <input id="at_home" type="checkbox" name="at_home" value="1">
                 <label for="at_home">
@@ -223,8 +219,9 @@
                     <div class="can-toggle__label-text"><?php esc_attr_e( 'Suspension', $this->plugin_name ); ?></div>
                 </label>
             </div>
-
-            <?php submit_button('Save New Scooter', 'primary','submit', TRUE); ?>        
+            <div class="submit">
+                 <?php submit_button('Save New Scooter', 'primary','submit', TRUE); ?>
+            </div>
         </div>
 
     </div>

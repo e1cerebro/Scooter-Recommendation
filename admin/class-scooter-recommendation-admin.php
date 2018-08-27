@@ -87,7 +87,7 @@ class Scooter_Recommendation_Admin {
 		}
 
 
-		echo $hook;
+		//echo $hook;
 
 	}
 
@@ -134,7 +134,7 @@ class Scooter_Recommendation_Admin {
 		}
 
 		//Shows the current page - remove later
-		echo " - ".$hook;
+		//echo " - ".$hook;
 
 	}
 

@@ -47,7 +47,7 @@
         <thead>
             <tr>
                 <th style="text-align:center;">Id</th>
-                <th style="text-align:center;">Scooter</th>
+                <th style="text-align:center;">Scooter Name</th>
 				<th style="text-align:center;"> Edit </th>
                 <th style="text-align:left;"> Delete </th>
 				
@@ -59,16 +59,17 @@
 
 				$view_path = 'admin.php?page=scooter-recommendation-view';
 				$url = admin_url($view_path);
-				$link = "<a class='scooter-primary-button' href='{$url}&scooter_id={$scooter->product_id}'>View Scooter Details</a>";
+				$name = get_the_title($scooter->product_id);
+				$link = "<a class='admin-link' href='{$url}&scooter_id={$scooter->product_id}'>".$name."</a>";
 			?>
 		    <tr>
                 <td data-search="Tiger Nixon" style="text-align:center;"><?php echo ++$count;?></td>
-                <td style="text-align:center;"><?php  esc_attr_e( get_the_title($scooter->product_id), $this->plugin_name  );  ?></td>
-                <td style="text-align:center;"><?php echo $link;  ?></td>
+                <td style="text-align:center;"><?php  _e($link, $this->plugin_name);  ?></td>
+                <td style="text-align:center;"><?php echo "";  ?></td>
                 <td style="text-align:center;">
 					<form method="post" name="scooter_form" action="">
-					<input type="hidden" name="product_id" value="<?php esc_attr_e($scooter->id); ?>"/>
-					<?php submit_button('Delete', 'secondary','submit', TRUE); ?>
+						<input type="hidden" name="product_id" value="<?php esc_attr_e($scooter->id); ?>"/>
+ 						<input type="submit" name="submit" id="submit" class="button" value="Delete">					
 					</form>
 				</td>
             </tr>  

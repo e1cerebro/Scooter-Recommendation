@@ -7,22 +7,23 @@
                 <h3 class="text-center text-upper">Scooter Recommendation Form</h3>
                 <form method="post" name="scooter_settings" action="options.php">
                     <?php 
-                        $options            = get_option($this->plugin_name);
+                        $options                   = get_option($this->plugin_name);
 
-                        $daily_use          = $options['daily_use'];
-                        $daily_use_title    = $options['daily_use_title'];
-                        $access             = $options['access'];
-                        $access_title       = $options['access_title'];
-                        $weight_range_title = $options['weight_range_title'];
-                        $weight_range       = $options['weight_range'];
-                        $height_range       = $options['height_range'];
-                        $height_range_title = $options['height_range_title'];
-                        $suspension         = $options['suspension'];
-                        $suspension_title   = $options['suspension_title'];
-                        $addition_question_title   = $options['addition_question_title'];
-                        $addition_question         = $options['addition_question'];
-                        $drivers_information_title = $options['drivers_information_title'];
-                        $drivers_information       = $options['drivers_information'];
+                        $daily_use                 = esc_html($options['daily_use']);
+                        $daily_use_title           = esc_html($options['daily_use_title']);
+                        $access                    = esc_html($options['access']);
+                        $access_title              = esc_html($options['access_title']);
+                        $weight_range_title        = esc_html($options['weight_range_title']);
+                        $weight_range              = esc_html($options['weight_range']);
+                        $height_range              = esc_html($options['height_range']);
+                        $height_range_title        = esc_html($options['height_range_title']);
+                        $suspension                = esc_html($options['suspension']);
+                        $suspension_title          = esc_html($options['suspension_title']);
+                        $addition_question_title   = esc_html($options['addition_question_title']);
+                        $addition_question         = esc_html($options['addition_question']);
+                        $drivers_information_title = esc_html($options['drivers_information_title']);
+                        $drivers_information       = esc_html($options['drivers_information']);
+
 
                         settings_fields($this->plugin_name);
                         do_settings_sections($this->plugin_name);

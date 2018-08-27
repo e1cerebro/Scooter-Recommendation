@@ -38,5 +38,30 @@
         $('div.driver-information').slideUp(100);
     });
 
+    $('.success-feedback').slideUp(10);
+    jQuery(document).on('click', '.radio-feedback', function() {
+
+        var feedback = 'Yes';
+
+        feedback = jQuery(this).data('feedback');
+        var id = jQuery('.last_id').val();
+
+        jQuery.ajax({
+            url: scooter_recommendation_script_ajax.ajax_url,
+            type: 'post',
+            data: {
+                action: 'save_feedback',
+                feedback: feedback,
+                id: id
+            },
+            success: function(response) {
+                $('.radio__container').slideUp();
+                $('.success-feedback').slideDown();
+                alert(response);
+            }
+        });
+
+    });
+
 
 })(jQuery);

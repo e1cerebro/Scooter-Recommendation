@@ -10,7 +10,15 @@
       $scooters = $wpdb->get_results( "SELECT * FROM $table WHERE `product_id` = $scooter_id" );
       
       $wpdb->flush();
-      
+
+      if($_GET['status'] == 'saved'){
+        echo  "
+                <div id=\"setting-error-settings_updated\" class=\"updated settings-error notice is-dismissible\"> 
+                    <p><strong>Settings saved.</strong></p>
+                    <button type=\"button\" class=\"notice-dismiss\"><span class=\"screen-reader-text\">Dismiss this notice.</span></button>
+                </div>
+            ";
+      }
  ?>
 
  </pre>
@@ -18,16 +26,15 @@
 <div class="wrap" id="app">
 
 
-<div id="page_body">
-<h2 class="text-center text-upper"><?php esc_attr_e( get_the_title($scooter_id), $this->plugin_name  ); ?></h2>
-<hr/>
-<br/>
-<form method="post" name="scooter_recommendation" action="">
+    <div id="page_body">
+    <h2 class="text-center text-upper"><?php esc_attr_e( get_the_title($scooter_id), $this->plugin_name  ); ?></h2>
+    <br/>
+    <form method="post" name="scooter_recommendation" action="">
 
-<input type="hidden"   placeholder="Scooter URL" class="regular-text"  name="product_url" value='<?php echo $scooters[0]->product_url;?>'/>
-<input type="hidden"  placeholder="Scooter ID" class="regular-text" name="product_id"  value='<?php echo $scooter_id; ?>'/>  
-    
-<div class="can-toggle can-toggle--size-small">
+        <input type="hidden"   placeholder="Scooter URL" class="regular-text"  name="product_url" value='<?php echo esc_url($scooters[0]->product_url); ?>'/>
+        <input type="hidden"  placeholder="Scooter ID" class="regular-text" name="product_id"  value='<?php esc_html_e($scooter_id); ?>'/>  
+            
+        <div class="can-toggle can-toggle--size-small">
             <input id="at_home" type="checkbox" name="at_home" value="1" <?php echo ( $scooters[0]->at_home == 1 ? 'checked' : ''); ?>>
             <label for="at_home">
                 <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
@@ -184,8 +191,9 @@
                 <div class="can-toggle__label-text"><?php esc_attr_e( 'Suspension', $this->plugin_name ); ?></div>
             </label>
         </div>
-
+        <div class="submit">
             <?php submit_button("Save Changes", 'primary','submit', TRUE); ?>        
+        </div>
      </form>
     </div>
 
@@ -193,66 +201,10 @@
 </div>
 
 <?php
+
     if($_POST['submit']){
- 
-        // $product_url            =   $_POST['product_url'];
-         $product_id             =   $_POST['product_id'];
-         $at_home                =   $_POST['at_home'];
-         $around_town            =   $_POST['around_town'];
-         $traveling_portable     =   $_POST['traveling_portable'];
-         $all_terrain            =   $_POST['all_terrain'];
-         $ramp                   =   $_POST['ramp'];
-         $elevator               =   $_POST['elevator'];
-         $verticle_lift          =   $_POST['verticle_lift'];
-         $stairs                 =   $_POST['stairs'];
-         $less_than_250          =   $_POST['less_than_250'];
-         $from_251_to_350        =   $_POST['from_251_350'];
-         $from_351_to_400        =   $_POST['from_351_400'];
-         $more_than_400_lbs      =   $_POST['more_than_400_lbs'];
-         $less_5_ft              =   $_POST['less_5_ft'];
-         $from_5ft_5_5ft         =   $_POST['from_5ft_5_5ft'];
-         $from_5_5ft_6ft         =   $_POST['from_5_5ft_6ft'];
-         $from_6ft_6_5ft         =   $_POST['from_6ft_6_5ft'];
-         $more_than_6_5ft        =   $_POST['more_than_6_5ft'];
-         $suspension             =   $_POST['suspension'];  
-        
-         $query =  $wpdb->update(
-                         $table,
-                         array(
-                                'at_home'     => $at_home,
-                                'around_town' =>$around_town,
-                                'traveling_portable' => $traveling_portable,
-                                'all_terrain' => $all_terrain,
-                                'ramp' =>$ramp,
-                                'elevator' => $elevator,
-                                'verticle_lift' =>$verticle_lift,
-                                'stairs' => $stairs,
-                                'less_than_250' => $less_than_250,
-                                'from_251_350'         =>  $from_251_to_350,
-                                'from_351_400'           => $from_351_to_400,
-                                'more_than_400_lbs' => $more_than_400_lbs,
-                                'less_5_ft'         =>$less_5_ft,
-                                'from_5ft_5_5ft'       => $from_5ft_5_5ft,
-                                'from_5_5ft_6ft'       => $from_5_5ft_6ft,
-                                'from_6ft_6_5ft'       =>$from_6ft_6_5ft,
-                                'more_than_6_5ft' => $more_than_6_5ft,
-                                'suspension'      =>$suspension,
-                         ),
-                         array( 'product_id' => intval($product_id) ),
-                         //array( '%s' ),
-                         array( '%d' )
-                     );
-        
-         
-                    $view_path = 'admin.php?page=scooter-recommendation-view';
-                    $link = "{$view_path}&scooter_id={$product_id}";
-                    //wp_reset_query();
-                    wp_redirect( admin_url($link), 301 );
-                    exit;
-
-                    $wpdb->flush();
-
-       }
+       include_once( 'snippets/edit-scooter/edit-scooter-record.php' );
+    }
 ?>
 
 

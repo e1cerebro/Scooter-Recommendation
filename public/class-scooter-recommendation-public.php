@@ -98,18 +98,42 @@ class Scooter_Recommendation_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/scooter-recommendation-public.js', array( 'jquery' ), $this->version, true );
+		wp_localize_script( $this->plugin_name, 'scooter_recommendation_script_ajax' , array( 'ajax_url' => admin_url('admin-ajax.php')) );
 
 	}
 
 
 	public function register_shortcodes() {
-		add_shortcode( 'randomquote', array( $this, 'list_quotes' ) );
+		add_shortcode( 'scooter-recommendation-form', array( $this, 'list_quotes' ) );
 	}
 
 	public function list_quotes() {
 
 		include_once( 'partials/scooter-recommendation-public-form.php' );
 
+	}
+
+
+	public function save_feedback(){
+
+		global $wpdb;
+
+		$feedback = $_POST['feedback'];
+
+		echo $id = $_POST['id'];
+
+		$table = $wpdb->prefix . "scooter_recommendation_submissions";
+
+		$query =  $wpdb->update(
+			$table,
+			array(
+				'feedback'      =>     $feedback
+			),
+			array( 'id'         =>     intval($id) )
+		);
+
+		die();
+		
 	}
 
 }

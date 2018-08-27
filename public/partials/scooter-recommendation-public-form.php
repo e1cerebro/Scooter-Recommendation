@@ -206,14 +206,24 @@
                     $table = $wpdb->prefix . "scooter_recommendation"; 
                    
                     $scooters = $wpdb->get_results( "SELECT * FROM $table WHERE $where_condition " );
-                     //print_r($wpdb->last_query);
+                    echo "<pre>";
+                    print_r($scooters);
+                    echo "</pre>"; 
+
+                    echo "<input type='hidden' class='last_id' value='".$wpdb->insert_id."' />";
+                    
+
+                   // exit;
 
                      ?>
                 <?php if(sizeof($scooters) != 0):?>
                     <div class="result-header">
-                        <h1 class="title"><?php _e(get_option($this->plugin_name."-result-page-settings")['result_title']); ?></h1>
+                        <h1 class="title" data-id="<?php $wpdb->insert_id; ?>"><?php _e(get_option($this->plugin_name."-result-page-settings")['result_title']); ?></h1>
                         <p class="sub-title"><?php _e(get_option($this->plugin_name."-result-page-settings")['result_description']); ?></p>
                     </div>
+               
+                     <?php include( 'snippets/scooter-feedback.php' ); ?>
+
                      <?php  foreach($scooters as $product): ?>
                      <?php
                         $_product = wc_get_product($product->product_id);
@@ -228,7 +238,7 @@
                                 </div>
                                 <div class="product-info">
                                     <div class="product-info-header">
-                                        <h1><?php  echo get_the_title($product->product_id);  ?></h1>
+                                    <a href="<?php echo get_post_permalink( $product->product_id); ?>"> <h1><?php  echo get_the_title($product->product_id);  ?></h1></a>
                                         <p class="price"><?php echo get_woocommerce_currency_symbol()."".$_product->get_regular_price(); ?></p>
                                     </div>
                                     <div class="product-description">
@@ -247,6 +257,9 @@
                     </div>
                     <?php endforeach; ?>
 
+                    <?php include( 'snippets/scooter-feedback.php' ); ?>
+
+
                     <div class="not-found">
                         <p class="link">
                             <a class="submit-btn btn-small" href="<?php echo $httpReferer; ?>">Search Again</a>
@@ -254,6 +267,10 @@
                             <a class="submit-btn btn-small" href="<?php echo $shop_page_url; ?>">Visit Our Store</a>
                         </p>
                     </div>
+
+
+                    
+
                 <?php else: ?>
                     <?php
                         $httpReferer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null;
@@ -286,25 +303,25 @@
 
                         <div class="can-toggle can-toggle--size-small">
                             <input id="at_home" type="checkbox" name="at_home" value="1">
-                            <label for="at_home">
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
+                            <label for="at_home"> 
                                 <div class="can-toggle__label-text"><?php esc_attr_e( 'At Home', $this->plugin_name  ); ?></div>
+                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
                             </label>
                         </div>
 
                         <div class="can-toggle can-toggle--size-small">
                             <input id="around_town" type="checkbox" name="around_town" value="1">
                             <label for="around_town">
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
                                 <div class="can-toggle__label-text"><?php esc_attr_e( 'Around town', $this->plugin_name  ); ?></div>
+                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
                             </label>
                         </div>
 
                         <div class="can-toggle can-toggle--size-small">
                             <input id="traveling_portable" type="checkbox" name="traveling_portable" value="1">
-                            <label for="traveling_portable">
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
+                            <label for="traveling_portable">   
                                 <div class="can-toggle__label-text"><?php esc_attr_e( 'Traveling/Portable', $this->plugin_name  ); ?></div>
+                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
                             </label>
                         </div>
 
@@ -312,8 +329,8 @@
                         <div class="can-toggle can-toggle--size-small">
                             <input id="all_terrain" type="checkbox" name="all_terrain" value="1">
                             <label for="all_terrain">
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
                                 <div class="can-toggle__label-text"><?php esc_attr_e( 'All terrain', $this->plugin_name  ); ?></div>
+                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
                             </label>
                         </div>
 
@@ -500,7 +517,7 @@
                 </div>
 
                 <div class="form-bottom">
-                    <button type="submit" class="submit-btn" value="Get Recommendation" name="submit">Get Recommendation</button>
+                    <button data-id="1" type="submit" id="submit-recommendation" class="submit-btn" value="Get Recommendation" name="submit">Get Recommendation</button>
                 </div>
 
             
