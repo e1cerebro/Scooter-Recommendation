@@ -56,6 +56,7 @@ class Scooter_Recommendation_Activator {
 				`height_range` varchar(225) DEFAULT NULL,
 				`suspension` varchar(225) DEFAULT NULL,
 				`feedback` varchar(225) DEFAULT NULL,
+				`scooters` varchar(225) DEFAULT NULL,
 				`date_submitted` varchar(225) DEFAULT NULL,
 				PRIMARY KEY (`id`)
 		) $charset_collate;";

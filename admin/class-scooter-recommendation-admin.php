@@ -73,7 +73,6 @@ class Scooter_Recommendation_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/scooter-recommendation-admin.css', array(), $this->version, 'all' );
 		
 		wp_enqueue_style( 'datatable-css', 'https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css', "", "", false );
 			
@@ -86,6 +85,7 @@ class Scooter_Recommendation_Admin {
 			wp_enqueue_style( 'buttons-css', plugin_dir_url( __FILE__ ) . 'css/buttons.css', array(), $this->version, 'all' );
 		}
 
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/scooter-recommendation-admin.css', array(), $this->version, 'all' );
 
 		//echo $hook;
 
@@ -161,8 +161,8 @@ public function add_plugin_admin_menu() {
      *        Administration Menus: http://codex.wordpress.org/Administration_Menus
      *
      */
-	
-	 add_menu_page(
+
+    add_menu_page(
                         'Scooter Recommendation Tag',
                         'Recommendation',
                         'manage_options',
@@ -171,6 +171,8 @@ public function add_plugin_admin_menu() {
                         'dashicons-universal-access-alt', 
                         9
 					);
+	
+	 
 					
 	add_submenu_page( 
 						"uchenna-scooter-recommendation",

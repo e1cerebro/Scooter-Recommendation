@@ -206,17 +206,19 @@
                     $table = $wpdb->prefix . "scooter_recommendation"; 
                    
                     $scooters = $wpdb->get_results( "SELECT * FROM $table WHERE $where_condition " );
-                    echo "<pre>";
-                    print_r($scooters);
-                    echo "</pre>"; 
-
                     echo "<input type='hidden' class='last_id' value='".$wpdb->insert_id."' />";
                     
 
                    // exit;
 
                      ?>
+
+                    <?php
+                        $product_array = '';
+                    ?>
                 <?php if(sizeof($scooters) != 0):?>
+
+                   
                     <div class="result-header">
                         <h1 class="title" data-id="<?php $wpdb->insert_id; ?>"><?php _e(get_option($this->plugin_name."-result-page-settings")['result_title']); ?></h1>
                         <p class="sub-title"><?php _e(get_option($this->plugin_name."-result-page-settings")['result_description']); ?></p>
@@ -225,9 +227,12 @@
                      <?php include( 'snippets/scooter-feedback.php' ); ?>
 
                      <?php  foreach($scooters as $product): ?>
+
+                     <?php $product_array.= $product->product_id.","; ?>
+
+
                      <?php
                         $_product = wc_get_product($product->product_id);
-                        
                      ?>
                      <?php $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->product_id ), 'single-post-thumbnail' );?>
 
@@ -256,6 +261,20 @@
 
                     </div>
                     <?php endforeach; ?>
+
+                    <?php
+
+                            $table = $wpdb->prefix . "scooter_recommendation_submissions";
+
+                            $query =  $wpdb->update(
+                                $table,
+                                array(
+                                    'scooters'      =>     rtrim($product_array, ',')
+                                ),
+                                array( 'id'         =>    $wpdb->insert_id )
+                            );
+
+                    ?>
 
                     <?php include( 'snippets/scooter-feedback.php' ); ?>
 
@@ -289,241 +308,276 @@
                 <?php endif; ?>
                
             <?php else: ?>
-            <div class="font-end-form">
 
-            <form method="post" action="">
-			    <div class="form-section">
-                    <div class="left-part">
+        <form method="post" action="">
+            <div class="flex-container">
+                <div class="flex-section">
+                    <div class="left-pane">
                         <h2><?php _e($daily_use_title, $this->plugin_name); ?></h2>
                         <div class="description">
                             <?php _e($daily_use, $this->plugin_name);?>
                         </div>
                     </div>
-                    <div class="right-part">
+                    <div class="right-pane">
 
-                        <div class="can-toggle can-toggle--size-small">
-                            <input id="at_home" type="checkbox" name="at_home" value="1">
-                            <label for="at_home"> 
-                                <div class="can-toggle__label-text"><?php esc_attr_e( 'At Home', $this->plugin_name  ); ?></div>
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            </label>
-                        </div>
+                            <p>
+                                <input id="at_home" type="checkbox" name="at_home" value="1" >
+                                <label for="at_home"><?php esc_attr_e( 'At Home', $this->plugin_name  ); ?></label>
+                            </p>
 
-                        <div class="can-toggle can-toggle--size-small">
-                            <input id="around_town" type="checkbox" name="around_town" value="1">
-                            <label for="around_town">
-                                <div class="can-toggle__label-text"><?php esc_attr_e( 'Around town', $this->plugin_name  ); ?></div>
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            </label>
-                        </div>
 
-                        <div class="can-toggle can-toggle--size-small">
+                            <p>
+                                <input id="around_town" type="checkbox" name="around_town" value="1">
+                                <label for="around_town"><?php esc_attr_e( 'Around town', $this->plugin_name  ); ?></label></label>
+                            </p>
+
+                            <p>
                             <input id="traveling_portable" type="checkbox" name="traveling_portable" value="1">
-                            <label for="traveling_portable">   
-                                <div class="can-toggle__label-text"><?php esc_attr_e( 'Traveling/Portable', $this->plugin_name  ); ?></div>
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            </label>
-                        </div>
+                                <label for="traveling_portable"><?php esc_attr_e( 'Traveling/Portable', $this->plugin_name  ); ?></label>
+                            </p>
 
-                        
-                        <div class="can-toggle can-toggle--size-small">
-                            <input id="all_terrain" type="checkbox" name="all_terrain" value="1">
-                            <label for="all_terrain">
-                                <div class="can-toggle__label-text"><?php esc_attr_e( 'All terrain', $this->plugin_name  ); ?></div>
-                                <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            </label>
-                        </div>
 
-                    </div>
+                            <p>
+                                <input id="all_terrain" type="checkbox" name="all_terrain" value="1">
+                                <label for="all_terrain">               
+                                    <?php esc_attr_e( 'All terrain', $this->plugin_name  ); ?> 
+                                </label>
+                            </p>
+
+                     </div>
                 </div>
 
-
-                <div class="form-section">
-                    <div class="left-part">
+                <div class="flex-section">
+                    <div class="left-pane">
                         <h2><?php _e($access_title, $this->plugin_name); ?></h2>
                         <div class="description"> <?php _e($access, $this->plugin_name); ?> </div>
                     </div>
-                    <div class="right-part">
-                       <div class="can-toggle can-toggle--size-small">
-                        <input id="ramp" type="checkbox" name="ramp" value="1">
-                        <label for="ramp">
-                            <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            <div class="can-toggle__label-text"><?php esc_attr_e( 'Ramp', $this->plugin_name  ); ?></div>
-                        </label>
-                    </div>
+                    <div class="right-pane">
 
-                    <div class="can-toggle can-toggle--size-small">
-                        <input id="elevator" type="checkbox" name="elevator" value="1">
-                        <label for="elevator">
-                            <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            <div class="can-toggle__label-text"><?php esc_attr_e( 'Elevator', $this->plugin_name  ); ?></div>
-                        </label>
-                    </div>
-        
-                    <div class="can-toggle can-toggle--size-small">
-                        <input id="verticle_lift" type="checkbox" name="verticle_lift" value="1">
-                        <label for="verticle_lift">
-                            <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            <div class="can-toggle__label-text"><?php esc_attr_e( 'Verticle Lift', $this->plugin_name  ); ?></div>
-                        </label>
-                    </div>
+                                <p>
+                                    <input id="ramp" type="checkbox" name="ramp" value="1">
+                                    <label for="ramp">
+                                        <?php esc_attr_e( 'Ramp', $this->plugin_name  ); ?>
+                                    </label>
+                                </p>
 
-                    <div class="can-toggle can-toggle--size-small">
-                        <input id="stairs" type="checkbox" name="stairs" value="1">
-                        <label for="stairs">
-                            <div class="can-toggle__switch" data-checked="Yes" data-unchecked="No"></div>
-                            <div class="can-toggle__label-text"><?php esc_attr_e( 'Stairs', $this->plugin_name  ); ?></div>
-                        </label>
-                    </div>
+                                <p>
+                                    <input id="elevator" type="checkbox" name="elevator" value="1">
+                                    <label for="elevator">
+                                      <?php esc_attr_e( 'Elevator', $this->plugin_name  ); ?>
+                                    </label>
+                                </p>
+                    
+                                <p>
+                                    <input id="verticle_lift" type="checkbox" name="verticle_lift" value="1">
+                                    <label for="verticle_lift">
+                                       <?php esc_attr_e( 'Verticle Lift', $this->plugin_name  ); ?>
+                                    </label>
+                                 </p>
 
-                    </div>
-                </div>
+                                <p>
+                                    <input id="stairs" type="checkbox" name="stairs" value="1">
+                                    <label for="stairs">
+                                        <?php esc_attr_e( 'Stairs', $this->plugin_name  ); ?>
+                                    </label>
+                                </p>
 
-
-                 <div class="form-section">
-                    <div class="left-part">
-                        <h2><?php _e($weight_range_title, $this->plugin_name); ?></h2>
-                        <div class="description"> <?php _e($weight_range, $this->plugin_name); ?> </div>
-                    </div>
-                    <div class="right-part">
-                             <div class="radio">
-                                <input id="less_than_250" name="drivers-weight" type="radio" value="less_than_250" checked>
-                                <label for="less_than_250" class="radio-label"><?php esc_attr_e( 'Less than 250', $this->plugin_name  ); ?></label>
                             </div>
+                        </div>
 
-                             <div class="radio">
-                                <input id="from_251_350" name="drivers-weight" type="radio" value="from_251_350"  >
-                                <label for="from_251_350" class="radio-label"><?php esc_attr_e('251- 350', $this->plugin_name  ); ?></label>
+                        <div class="flex-section"> <!-- Flex section starts --> 
+
+                                <div class="left-pane"> <!-- Left Pane starts --> 
+                                    <h2><?php _e($weight_range_title, $this->plugin_name); ?></h2>
+                                    <div class="description"> <?php _e($weight_range, $this->plugin_name); ?> </div>
+                                </div><!-- Left Pane Ends -->
+
+                                <div class="right-pane"> <!-- Right Pane Starts -->
+                                        <p>
+                                            <input id="less_than_250" name="drivers-weight" type="radio" value="less_than_250" checked>
+                                            <label for="less_than_250" class="radio-label"><?php esc_attr_e( 'Less than 250', $this->plugin_name  ); ?></label>
+                                        </p>
+
+                                        <p>
+                                            <input id="from_251_350" name="drivers-weight" type="radio" value="from_251_350"  >
+                                            <label for="from_251_350" class="radio-label"><?php esc_attr_e('251- 350', $this->plugin_name  ); ?></label>
+                                        </p>
+
+                                        <p>
+                                            <input id="from_351_400" name="drivers-weight" type="radio" value="from_351_400"  >
+                                            <label for="from_351_400" class="radio-label"><?php esc_attr_e( '351-400' , $this->plugin_name  ); ?></label>
+                                        </p>
+
+                                        <p>
+                                            <input id="more_than_400_lbs" name="drivers-weight" type="radio" value="more_than_400_lbs"  >
+                                            <label for="more_than_400_lbs" class="radio-label"><?php esc_attr_e( 'More than 400 lbs' , $this->plugin_name  ); ?></label>
+                                        </p>
+                                        </p>
+            
+                                 </div><!-- Right Pane Ends -->
+                        </div><!-- Flex Section Ends -->
+
+
+                        <!--  Height Range Section --> 
+                        <!-- Flex section starts --> 
+                        <div class="flex-section"> 
+                                <!-- Left Pane Start -->
+                                <div class="left-pane"> 
+                       `             <h2><?php _e($height_range_title, $this->plugin_name); ?></h2>
+                                    <div class="description"> <?php _e($height_range, $this->plugin_name); ?> </div>
+                                </div>
+
+                               <!-- Left Pane Ends -->
+
+                                <!-- Right Pane Start -->
+
+                                <div class="right-pane">
+
+                                    <p>
+                                        <input id="less_5_ft" name="drivers-height-range" type="radio" value="less_5_ft"  checked>
+                                        <label for="less_5_ft" class="radio-label"><?php esc_attr_e( 'Less 5 ft' , $this->plugin_name  ); ?></label>
+                                    </p>
+
+                                    <p>
+                                        <input id="from_5ft_5_5ft" name="drivers-height-range" type="radio" value="from_5ft_5_5ft"  >
+                                        <label for="from_5ft_5_5ft" class="radio-label"><?php esc_attr_e( '5 ft- 5.5 ft', $this->plugin_name  ); ?></label>
+                                    </p>
+
+                                    <p>
+                                        <input id="from_5_5ft_6ft" name="drivers-height-range" type="radio" value="from_5_5ft_6ft"  >
+                                        <label for="from_5_5ft_6ft" class="radio-label"><?php esc_attr_e('5.5 ft - 6 ft', $this->plugin_name  ); ?></label>
+                                    </p>
+
+                                    <p>
+                                        <input id="from_6ft_6_5ft" name="drivers-height-range" type="radio" value="from_6ft_6_5ft"  >
+                                        <label for="from_6ft_6_5ft" class="radio-label"><?php esc_attr_e('6 ft- 6.5 ft', $this->plugin_name  ); ?></label>
+                                    </p>
+
+                                    <p>
+                                        <input id="more_than_6_5ft" name="drivers-height-range" type="radio" value="from_6ft_6_5ft"  >
+                                        <label for="more_than_6_5ft" class="radio-label"><?php esc_attr_e('More than 6.5ft', $this->plugin_name  ); ?></label>
+                                    </p>
+
+                                </div>
+                                <!-- Right Pane Ends -->
                             </div>
+                            <!-- Flex Section Ends -->
 
-                             <div class="radio">
-                                <input id="from_351_400" name="drivers-weight" type="radio" value="from_351_400"  >
-                                <label for="from_351_400" class="radio-label"><?php esc_attr_e( '351-400' , $this->plugin_name  ); ?></label>
+
+                        <!-- Scooter Suspension Section --> 
+                        <!-- Flex section starts --> 
+                        <div class="flex-section"> 
+                                <!-- Left Pane Start -->
+                                <div class="left-pane"> 
+                                    <h2><?php _e($suspension_title, $this->plugin_name); ?></h2>
+                                     <div class="description"> <?php _e($suspension, $this->plugin_name); ?> </div>
+                                </div>
+
+                               <!-- Left Pane Ends -->
+
+                                <!-- Right Pane Start -->
+
+                                <div class="right-pane">
+                                    <p>
+                                        <input id="suspension-yes" name="suspension" type="radio" value="1"  checked>
+                                        <label for="suspension-yes" class="radio-label"><?php esc_attr_e( 'Yes' , $this->plugin_name  ); ?></label>
+                                    </p>
+
+                                    <p>
+                                        <input id="suspension-no" name="suspension" type="radio" value="0"  checked>
+                                        <label for="suspension-no" class="radio-label"><?php esc_attr_e( 'No' , $this->plugin_name  ); ?></label>
+                                    </p>
+                                
+                                </div>
+                                <!-- Right Pane Ends -->
                             </div>
+                            <!-- Flex Section Ends -->
 
-                             <div class="radio">
-                                <input id="more_than_400_lbs" name="drivers-weight" type="radio" value="more_than_400_lbs"  >
-                                <label for="more_than_400_lbs" class="radio-label"><?php esc_attr_e( 'More than 400 lbs' , $this->plugin_name  ); ?></label>
+
+                        <!-- Additional Question Section --> 
+                        <!-- Flex section starts --> 
+                        <div class="flex-section"> 
+                                <!-- Left Pane Start -->
+                                <div class="left-pane"> 
+                                     <h2><?php _e($addition_question_title, $this->plugin_name); ?></h2>
+                                     <div class="description"> <?php _e($addition_question, $this->plugin_name); ?></div>
+                                 </div>
+
+                               <!-- Left Pane Ends -->
+
+                                <!-- Right Pane Start -->
+
+                                <div class="right-pane">
+                                  
+                                    <p>
+                                        <input class="additional-recommendation" id="additional-recommendation-yes" name="additional-recommendation" type="radio" value="1"  >
+                                        <label for="additional-recommendation-yes" id="additional-recommendation-yes-label" class="radio-label"><?php esc_attr_e( 'Yes please' , $this->plugin_name  ); ?></label>
+                                    </p>
+
+                                    <p>
+                                        <input class="additional-recommendation" id="additional-recommendation-no" name="additional-recommendation" type="radio" value="0" checked>
+                                        <label for="additional-recommendation-no" class="radio-label"><?php esc_attr_e( 'No thank you, just automated suggestion' , $this->plugin_name  ); ?></label>
+                                    </p>
+                                
                             </div>
- 
-                    </div>
-                </div>
-
-                 <div class="form-section">
-                    <div class="left-part">
-                        <h2><?php _e($height_range_title, $this->plugin_name); ?></h2>
-                        <div class="description"> <?php _e($height_range, $this->plugin_name); ?> </div>
-                    </div>
-                    <div class="right-part">
-
-                        <div class="radio">
-                            <input id="less_5_ft" name="drivers-height-range" type="radio" value="less_5_ft"  checked>
-                            <label for="less_5_ft" class="radio-label"><?php esc_attr_e( 'Less 5 ft' , $this->plugin_name  ); ?></label>
+                            <!-- Right Pane Ends -->
                         </div>
+                        <!-- Flex Section Ends -->
 
-                        <div class="radio">
-                            <input id="from_5ft_5_5ft" name="drivers-height-range" type="radio" value="from_5ft_5_5ft"  >
-                            <label for="from_5ft_5_5ft" class="radio-label"><?php esc_attr_e( '5 ft- 5.5 ft', $this->plugin_name  ); ?></label>
+
+                        <!-- Scooter Suspension Section --> 
+                        <!-- Flex section starts --> 
+                        <div class="flex-section driver-information"> 
+                                <!-- Left Pane Start -->
+                                <div class="left-pane"> 
+                                    <h2><?php _e($drivers_information_title, $this->plugin_name); ?></h2>
+                                    <div class="description"><?php _e($drivers_information, $this->plugin_name); ?></div>
+                                </div>
+
+                               <!-- Left Pane Ends -->
+
+                                <!-- Right Pane Start -->
+
+                                <div class="right-pane">
+                                        <input type="text" name="drivers-name" value="" size="40"   id="drivers-name"  placeholder="Enter Your Name">
+                                        <br>
+                                        <input type="email" name="drivers-email" value="" size="40"   id="drivers-email" placeholder="Enter Email Address">
+                                        <br>
+                                        <input type="tel" name="drivers-phone" value="" size="40"  id="drivers-phone"  placeholder="Enter Phone Number">
+                                        <p>
+                                            Would you like us to give you a call back?
+                                        </p>
+                                        <p>
+                                            <input id="consent-yes" name="consent" type="radio" value="1"  checked>
+                                            <label for="consent-yes" class="radio-label"><?php esc_attr_e( 'Yes please' , $this->plugin_name  ); ?></label>
+                                        </p>
+
+                                        <p>
+                                            <input id="consent-no" name="consent" type="radio" value="0"  checked>
+                                            <label for="consent-no" class="radio-label"><?php esc_attr_e( 'No thank you' , $this->plugin_name  ); ?></label>
+                                        </p>
+                                     
+                                
+                                </div>
+                            <!-- Right Pane Ends -->
                         </div>
+                        <!-- Flex Section Ends -->
 
-                        <div class="radio">
-                            <input id="from_5_5ft_6ft" name="drivers-height-range" type="radio" value="from_5_5ft_6ft"  >
-                            <label for="from_5_5ft_6ft" class="radio-label"><?php esc_attr_e('5.5 ft - 6 ft', $this->plugin_name  ); ?></label>
-                        </div>
 
-                        <div class="radio">
-                            <input id="from_6ft_6_5ft" name="drivers-height-range" type="radio" value="from_6ft_6_5ft"  >
-                            <label for="from_6ft_6_5ft" class="radio-label"><?php esc_attr_e('6 ft- 6.5 ft', $this->plugin_name  ); ?></label>
-                        </div>
 
-                        <div class="radio">
-                            <input id="more_than_6_5ft" name="drivers-height-range" type="radio" value="from_6ft_6_5ft"  >
-                            <label for="more_than_6_5ft" class="radio-label"><?php esc_attr_e('More than 6.5ft', $this->plugin_name  ); ?></label>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="left-part">
-
-                        <h2><?php _e($suspension_title, $this->plugin_name); ?></h2>
-                        <div class="description"> <?php _e($suspension, $this->plugin_name); ?> </div>
-                    </div>
-                    <div class="right-part">
-                        <div class="radio">
-                            <input id="suspension-yes" name="suspension" type="radio" value="1"  checked>
-                            <label for="suspension-yes" class="radio-label"><?php esc_attr_e( 'Yes' , $this->plugin_name  ); ?></label>
-                        </div>
-
-                        <div class="radio">
-                            <input id="suspension-no" name="suspension" type="radio" value="0"  checked>
-                            <label for="suspension-no" class="radio-label"><?php esc_attr_e( 'No' , $this->plugin_name  ); ?></label>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <div class="left-part">
-
-                        <h2><?php _e($addition_question_title, $this->plugin_name); ?></h2>
-                        <div class="description">
-                        <?php _e($addition_question, $this->plugin_name); ?>
-                        </div>
-                    </div>
-                    <div class="right-part">
-                   
-                        <div class="radio horizontal-radio">
-                            <input class="additional-recommendation" id="additional-recommendation-yes" name="additional-recommendation" type="radio" value="1"  >
-                            <label for="additional-recommendation-yes" id="additional-recommendation-yes-label" class="radio-label"><?php esc_attr_e( 'Yes please' , $this->plugin_name  ); ?></label>
-                        </div>
-
-                        <div class="radio horizontal-radio">
-                            <input class="additional-recommendation" id="additional-recommendation-no" name="additional-recommendation" type="radio" value="0" checked>
-                            <label for="additional-recommendation-no" class="radio-label"><?php esc_attr_e( 'No thank you, just automated suggestion' , $this->plugin_name  ); ?></label>
-                        </div>
-                    </div>
-                </div>
-                
-                
-
-                 <div class="form-section driver-information">
-                    <div class="left-part">
-                        <h2><?php _e($drivers_information_title, $this->plugin_name); ?></h2>
-                        <div class="description">
-                        <?php _e($drivers_information, $this->plugin_name); ?>                        </div>
-                         </div>
-                    <div class="right-part">
-                            <input type="text" name="drivers-name" value="" size="40"   id="drivers-name"  placeholder="Enter Your Name">
-                            <br>
-                            <input type="email" name="drivers-email" value="" size="40"   id="drivers-email" placeholder="Enter Email Address">
-                           <br>
-                            <input type="tel" name="drivers-phone" value="" size="40"  id="drivers-phone"  placeholder="Enter Phone Number">
-                            <p>
-                                Would you like us to give you a call back?
-                            </p>
-                            <div class="radio horizontal-radio">
-                                <input id="consent-yes" name="consent" type="radio" value="1"  checked>
-                                <label for="consent-yes" class="radio-label"><?php esc_attr_e( 'Yes please' , $this->plugin_name  ); ?></label>
-                            </div>
-
-                            <div class="radio horizontal-radio">
-                                <input id="consent-no" name="consent" type="radio" value="0"  checked>
-                                <label for="consent-no" class="radio-label"><?php esc_attr_e( 'No thank you' , $this->plugin_name  ); ?></label>
-                            </div>
-                            
-                        </div>
-                </div>
+                 
 
                 <div class="form-bottom">
                     <button data-id="1" type="submit" id="submit-recommendation" class="submit-btn" value="Get Recommendation" name="submit">Get Recommendation</button>
                 </div>
 
+                  
+                
+                
+                </div>      
             
-            </form>
-           
-            <?php endif;?>
+        </form>
+    
+    <?php endif;?>
 
-		</div>
 

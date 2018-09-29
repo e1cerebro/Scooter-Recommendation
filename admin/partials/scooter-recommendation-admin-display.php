@@ -40,9 +40,10 @@
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 
 <div class="wrap" id="app">
+<div class="flex-container">  
+        <div class="flex-section">
     <h1>All Scooters</h1>
     
-
 	<table id="example" class="display" style="width:100%">
         <thead>
             <tr>
@@ -50,7 +51,6 @@
                 <th style="text-align:center;">Scooter Name</th>
 				<th style="text-align:center;"> Edit </th>
                 <th style="text-align:left;"> Delete </th>
-				
             </tr>
         </thead>
         <tbody>
@@ -65,7 +65,7 @@
 		    <tr>
                 <td data-search="Tiger Nixon" style="text-align:center;"><?php echo ++$count;?></td>
                 <td style="text-align:center;"><?php  _e($link, $this->plugin_name);  ?></td>
-                <td style="text-align:center;"><?php echo "";  ?></td>
+                <td style="text-align:center;"><?php echo "<a class='admin-link' href='{$url}&scooter_id={$scooter->product_id}'>Edit"."</a>";  ?></td>
                 <td style="text-align:center;">
 					<form method="post" name="scooter_form" action="">
 						<input type="hidden" name="product_id" value="<?php esc_attr_e($scooter->id); ?>"/>
@@ -78,7 +78,8 @@
  
     </table>
 
-	
+			</div>
+	</div>
 </div>
 
 <?php if($_POST['submit']): ?>

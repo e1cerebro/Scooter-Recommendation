@@ -57,18 +57,252 @@ div.submit p.submit {
 }
 
 div.submit p.submit input {
-    background-color: green;
-    padding-bottom: 40px;
-    padding-top: 15px;
-    padding-right: 34px;
-    padding-left: 34px;
+    background-color: #448AFF;
+    color: #fff;
     font-size: 14px;
-    border: 1px solid #000;
-    border-radius: 5px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 36px;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: background-color 1s;
 }
 
 div.submit p.submit input:hover {
-    background: #00c24f;
-    border-color: #516c79;
+    background: #40C4FF;
     color: #fff;
+}
+
+
+/* Single Submission */
+
+div.submission {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-self: center;
+    width: 71%;
+}
+
+.wrap a {
+    position: relative;
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.wrap a:hover {
+    color: #000;
+}
+
+.wrap a:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.wrap a:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+div.submission .header {
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    text-align: center;
+}
+
+div.submission .row {
+    padding: 12px;
+    margin-top: 4px;
+    background-color: aliceblue;
+}
+
+div.submission .body {}
+
+div.submission .row .subject {
+    font-weight: bold;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+div.submission .row .content {
+    font-size: 1em;
+    padding-left: 8px;
+}
+
+div.submission .body .section {
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+
+/* Custom Form Styling for the backend */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Economica');
+.flex-container {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.69);
+    flex-flow: column wrap;
+    padding: 16px;
+    border-radius: 5px;
+    -webkit-box-shadow: -1px 0px 17px 3px rgba(199, 189, 199, 1);
+    -moz-box-shadow: -1px 0px 17px 3px rgba(199, 189, 199, 1);
+    box-shadow: -1px 0px 17px 3px rgba(199, 189, 199, 1);
+    /* border-top: 3px solid #190101; */
+    /* border-top-left-radius: 10px; */
+    /* border-bottom: 3px solid #000; */
+    /* border-bottom-right-radius: 10px; */
+}
+
+.flex-section {
+    display: flex;
+    flex-flow: column wrap;
+    padding: 2px;
+    margin-bottom: 31px;
+    width: 100%;
+    margin: 10px auto;
+    padding: 36px;
+    border: 3px solid #efefef;
+    justify-content: center;
+}
+
+.left-pane {
+    margin-bottom: 16px;
+}
+
+.left-pane h2 {
+    font-weight: 900;
+    font-size: 21px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000;
+    padding: 7px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.right-pane h5 {
+    /* font-weight: 900; */
+    font-size: 1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #000;
+    /* padding: 7px; */
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px;
+}
+
+div.description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+}
+
+.right-pane {
+    /* align-self: stretch; */
+    padding: 32px;
+    /* display: flex; */
+    /* justify-content: space-evenly; */
+    flex-flow: row wrap;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin-top: 0;
+    /* align-items: center; */
+    background: ghostwhite;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+.scooters-dropdown {
+    display: flex;
+}
+
+.flex-section .form-content {
+    display: flex;
+    align-items: stretch;
+    flex-flow: column wrap;
+    align-self: center;
+    width: 70%;
+}
+
+.form-content input {
+    margin-bottom: 18px;
+    width: 81%;
+}
+
+.flex-container .header-section {
+    background-color: #000000;
+    padding: 45px;
+    margin-bottom: 20px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+}
+
+.special-header {
+    font-weight: 900;
+    font-size: 21px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #000;
+    padding: 7px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.flex-container .header-section-2 {
+    padding: 45px;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+}
+
+.flex-container .header-section-2 h2 {
+    font-weight: bold;
+    font-family: 'Economica', sans-serif;
+}
+
+.flex-container .header-section-2 a {
+    font-style: italic;
+    text-decoration: none;
+}
+
+.meta-info {
+    background-color: #fff;
+    color: #000;
+    text-transform: capitalize;
+    font-size: 0.9em;
+    padding-top: 10px;
+    font-style: italic;
+    padding-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#setting-error-settings_updated p {
+    color: #000000;
+}
+
+div.response-footer {
+    display: flex;
+    flex-flow: column wrap;
+    margin-top: 20px;
+    padding-top: 20px;
+    align-items: center;
+    border-top: 1px solid #000;
+}
+
+div.response-footer h3 {
+    font-weight: bold;
+    font-size: 1.4em;
+}
+
+div.response-footer h4 {
+    font-size: 1.3em;
+    padding-left: 20px;
 }

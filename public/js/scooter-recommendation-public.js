@@ -57,7 +57,6 @@
             success: function(response) {
                 $('.radio__container').slideUp();
                 $('.success-feedback').slideDown();
-                alert(response);
             }
         });
 

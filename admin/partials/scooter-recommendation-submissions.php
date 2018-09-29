@@ -16,37 +16,49 @@ function scooter_country_set_options($option){
 
 ?>
 <div class="wrap">
-    <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-    	<table id="example" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th style="text-align:center;">Id</th>
-                <th style="text-align:left;">Name</th>
-				<th style="text-align:center;">Email</th>
-                <th style="text-align:left;">Phone</th>
-                <th style="text-align:left;">Call On Phone</th>
-                <th style="text-align:left;">Wants Custom Suggestion</th>
-                <th style="text-align:left;">Date Submitted</th>
-				
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($submissions as $submission):?>
-                <?php
-                    $view_path = 'admin.php?page=scooter-recommendation-single-submission-view';
-                    $url = admin_url($view_path);
-                    $link = "<a class='admin-link' href='{$url}&id={$submission->id}'>".$submission->drivers_name."</a>";
-                ?>
+    <div class="flex-container">  
+        <div class="flex-section">
+            <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+            <table id="example" class="display" style="width:100%">
+            <thead>
                 <tr>
-                    <td style="text-align:center;"><?php esc_attr_e(++$counter); ?></td>
-                    <td style="text-align:left;"><?php _e($link); ?></td>
-                    <td style="text-align:center;"><a class="admin-link" href="mailto:<?php echo esc_attr_e($submission->drivers_email); ?>">  <?php echo esc_attr_e($submission->drivers_email); ?></a></td>
-                    <td style="text-align:center;"><a class="admin-link" href="tel:<?php echo esc_attr_e($submission->drivers_phone); ?>">  <?php echo esc_attr_e($submission->drivers_phone);  ?> </a></td>
-                    <td style="text-align:center;"><?php echo esc_attr_e(scooter_country_set_options($submission->drivers_consent));  ?></td>
-                    <td style="text-align:center;"><?php echo esc_attr_e(scooter_country_set_options($submission->custom_suggestion));  ?></td>
-                    <td style="text-align:center;"><?php echo esc_attr_e($submission->date_submitted);  ?></td>
+                    <th style="text-align:center;">Id</th>
+                    <th style="text-align:left;">Name</th>
+                    <th style="text-align:center;">Email</th>
+                    <th style="text-align:left;">Phone</th>
+                    <th style="text-align:left;">Call On Phone</th>
+                    <th style="text-align:left;">Wants Custom Suggestion</th>
+                    <th style="text-align:left;">Date Submitted</th>
+                    
                 </tr>
-            <?php endforeach; ?>
-         </tbody>
-     </table>
+            </thead>
+            <tbody>
+                <?php foreach($submissions as $submission):?>
+                    <?php
+                        $view_path = 'admin.php?page=scooter-recommendation-single-submission-view';
+                        $url = admin_url($view_path);
+                        $drivers_name = 'Anonymous';
+                        if(strlen($submission->drivers_name) > 0){
+                            $drivers_name = $submission->drivers_name;
+                        }
+                        $link = "<a class='admin-link' href='{$url}&id={$submission->id}'>".$drivers_name."</a>";
+
+                        
+                    ?>
+                    <tr>
+                        <td style="text-align:center;"><a href="<?php echo $url."&id=".$submission->id; ?>"><?php esc_attr_e(++$counter); ?> </a></td>
+                        <td style="text-align:left;"><?php _e($link); ?></td>
+                        <td style="text-align:center;"><a class="admin-link" href="mailto:<?php echo esc_attr_e($submission->drivers_email); ?>">  <?php echo esc_attr_e($submission->drivers_email); ?></a></td>
+                        <td style="text-align:center;"><a class="admin-link" href="tel:<?php echo esc_attr_e($submission->drivers_phone); ?>">  <?php echo esc_attr_e($submission->drivers_phone);  ?> </a></td>
+                        <td style="text-align:center;"><?php echo esc_attr_e(scooter_country_set_options($submission->drivers_consent));  ?></td>
+                        <td style="text-align:center;"><?php echo esc_attr_e(scooter_country_set_options($submission->custom_suggestion));  ?></td>
+                        <td style="text-align:center;"><?php echo esc_attr_e($submission->date_submitted);  ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+
 </div>

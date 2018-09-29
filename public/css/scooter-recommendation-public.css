@@ -1,372 +1,397 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
-
-div.font-end-form {
-    width: 1000px;
-    margin: 10px auto;
-    min-height: 500px;
-    background-color: #f7f7f7;
-    padding: 50px;
-    border: 3px solid #efefef;
-}
-
-div.form-section {
-    width: 100%;
-    border: 1px solid white;
-    min-height: 258px;
-    padding: 25px;
-    margin-bottom: 20px;
-    margin-top: -16px;
-    box-shadow: 2px 1px 5px 2px rgba(1, 2, 2, 0.22), 0 1px 0px 0 rgba(27, 19, 19, 0);
-}
-
-div.form-section div.left-part {
-    width: 40%;
-    float: left;
-}
-
-div.form-section div.right-part {
-    width: 60%;
-    float: right;
-    margin-right: -22px;
-}
-
-div.form-bottom {
-    width: 250px !important;
-    margin: 10px auto !important;
-}
-
-.product-img {
-    float: left;
-    margin-top: 20px;
-    transition: all 0.5s linear;
-    margin-right: 17px;
-    border: 1px solid #b3b1b1;
-}
-
-.product-img:hover {
-    -webkit-transform: scale(1.03);
-    transform: scale(1.03);
-}
-
-div.box {
-    width: 85%;
-    margin: 17px auto;
-    padding: 31px;
-}
-
-div.product-list {
-    border-top: 1px solid #eaeaea;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-div.product-description {
-    margin-top: 23px;
-    margin-bottom: 28px;
-}
-
-div.product-list:first-child {
-    border-top: none !important;
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-div.product-info-header {
-    border-bottom: 1px solid #eaeaea;
-    padding-bottom: 0;
-    margin-bottom: 25px;
-}
-
-div.product-info-header h1 {
-    font-size: 27px;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-div.product-info-header .price {
-    margin-bottom: 0;
-    font-size: 28px;
-}
-
-div.product-info-footer a.link-button {
-    width: 144px;
-    padding: 10px;
-    color: #fff;
-    font-size: 15px;
-    margin: 49px auto;
-    background-color: green;
-}
-
-div.product-info-footer a.link-button:hover {
-    background-color: #336d33;
-}
-
-
-/* RADIO BUTTONS */
-
-.radio {
-    margin: 0.5rem;
-}
-
-.radio input[type="radio"] {
-    position: absolute;
-    opacity: 0;
-}
-
-.radio input[type="radio"]+.radio-label:before {
-    content: '';
-    background: #f4f4f4;
-    border-radius: 100%;
-    border: 1px solid #b4b4b4;
-    display: inline-block;
-    width: 1.4em;
-    height: 1.4em;
-    position: relative;
-    top: -0.2em;
-    margin-right: 1em;
-    vertical-align: top;
-    cursor: pointer;
-    text-align: center;
-    transition: all 250ms ease;
-}
-
-.radio input[type="radio"]:checked+.radio-label:before {
-    background-color: #70c767;
-    box-shadow: inset 0 0 0 4px #f4f4f4;
-}
-
-.radio input[type="radio"]:focus+.radio-label:before {
-    outline: none;
-    border-color: #3197EE;
-}
-
-.radio input[type="radio"]:disabled+.radio-label:before {
-    box-shadow: inset 0 0 0 4px #f4f4f4;
-    border-color: #b4b4b4;
-    background: #b4b4b4;
-}
-
-.radio input[type="radio"]+.radio-label:empty:before {
-    margin-right: 0;
-}
-
-.radio-label {
-    font-size: 18px;
-    font-size: 13px;
-    text-transform: uppercase;
-    font-weight: bold !important;
-}
-
-div.not-found {
-    width: 930px;
-    margin: 10px auto;
-    padding: 12px;
-}
-
-div.not-found h3 {
-    font-size: 30px;
-    text-align: center;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-p.link a,
-.submit-btn {
-    background-color: #429c3c;
-    color: #fff;
-    font-size: 14px;
-    text-transform: uppercase;
-    border-radius: 6px;
-    padding-right: 28px;
-    padding-left: 28px;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    border: 1px solid #fff;
-}
-
-.border-button {
-    padding-bottom: 4px;
-    color: #000;
-    text-transform: uppercase;
-    padding-left: 7px;
-    padding-right: 7px;
-    color: #000;
-    font-weight: 400;
-    border-bottom: 1px solid #000;
-}
-
-.border-button:hover {
-    color: #000;
-    font-weight: bold;
-    border-bottom: 2px solid #000;
-}
-
-div.not-found p.link a:hover,
-.submit-btn:hover {
-    background-color: #4d8449;
-}
-
-.btn-small {
-    font-size: 12px !important;
-    padding-right: 21px !important;
-    padding-left: 21px !important;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-}
-
-div.not-found p.link {
-    text-align: center;
-    margin-top: 37px;
-    border-top: 2px solid #e8e8e8;
-    padding: 28px;
-}
-
-
-/* Styling the header of the result page */
-
-div.result-header {
-    text-align: center;
-}
-
-div.result-header h1.title {
-    font-size: 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-div.result-header p.sub-title {
-    text-align: center;
-    font-size: 17px;
-}
-
-div.right-part input[type="text"],
-div.right-part input[type="tel"],
-div.right-part input[type="email"] {
-    margin-bottom: 7px;
-}
-
-.horizontal-radio {
-    display: table-cell !important;
-}
-
-.horizontal-radio label {
-    padding-left: 0px !important;
-    padding-right: 14px;
-}
-
-.additional-section {
-    text-align: center;
-    width: 100%;
-    border: 1px solid white;
-    min-height: 258px;
-    padding: 25px;
-    margin-bottom: 20px;
-    margin-top: -16px;
-    box-shadow: 2px 1px 5px 2px rgba(1, 2, 2, 0.22), 0 1px 0px 0 rgba(27, 19, 19, 0);
-}
-
-.hide {
-    display: none;
-}
-
-div.feedback {
-    background-color: #f1f1f1;
-    padding: 30px;
-    text-align: center;
-}
-
-div.feedback h3 {
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.radio,
-.radio__label,
-.radio__label:after,
-.radio__label:before {
-    box-sizing: border-box;
-}
-
-.radio__container:nth-child(1) {
-    padding-bottom: 35px;
-    margin-bottom: 28px;
-    border-bottom: 1px dotted #dbdbdb;
-}
-
-.radio__container .radio-inline {
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.radio__container .radio {
-    display: inline;
-    opacity: 0;
-    width: 0;
-    margin: 0;
-    overflow: hidden;
-    -webkit-appearance: none;
-}
-
-.radio__container .radio__label {
-    display: inline-block;
-    height: 50px;
-    position: relative;
-    padding: 15px 10px 15px 28px;
-    cursor: pointer;
-    vertical-align: bottom;
-    color: rgba(0, 0, 0, 0.54);
-    font: 300 14px/20px Helvetica, Arial, sans-serif;
-    transition: color 200ms ease;
-}
-
-.radio__container .radio__label:before,
-.radio__container .radio__label:after {
-    position: absolute;
-    content: "";
-    border-radius: 50%;
-    transition: border-color 200ms ease, -webkit-transform 200ms ease;
-    transition: transform 200ms ease, border-color 200ms ease;
-    transition: transform 200ms ease, border-color 200ms ease, -webkit-transform 200ms ease;
-}
-
-.radio__container .radio__label:before {
-    left: 0;
-    top: 15px;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #00b9eb;
-}
-
-.radio__container .radio__label:after {
-    top: 20px;
-    left: 5px;
-    width: 10px;
-    height: 10px;
-    -webkit-transform: scale(0);
-    transform: scale(0);
-    background-color: #3c91e6;
-}
-
-.radio__container .radio__label:hover {
-    color: #3c91e6;
-}
-
-.radio__container .radio__label:hover:before {
-    border-color: #fb872b;
-}
-
-.radio__container .radio:checked+.radio__label {
-    color: rgba(0, 0, 0, 0.87);
-}
-
-.radio__container .radio:checked+.radio__label:before {
-    border-color: #3c91e6;
-}
-
-.radio__container .radio:checked+.radio__label:after {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-}
+ div.form-bottom {
+     display: flex;
+     justify-content: center;
+ }
+ 
+ .product-img {
+     float: left;
+     margin-top: 20px;
+     transition: all 0.5s linear;
+     margin-right: 17px;
+     border: 1px solid #b3b1b1;
+ }
+ 
+ .product-img:hover {
+     -webkit-transform: scale(1.03);
+     transform: scale(1.03);
+ }
+ 
+ div.box {
+     width: 85%;
+     margin: 17px auto;
+     padding: 31px;
+ }
+ 
+ div.product-list {
+     border-top: 1px solid #eaeaea;
+     margin-top: 30px;
+     margin-bottom: 30px;
+ }
+ 
+ div.product-description {
+     margin-top: 23px;
+     margin-bottom: -8px;
+ }
+ 
+ div.product-list:first-child {
+     border-top: none !important;
+     margin-top: 30px;
+     margin-bottom: 30px;
+ }
+ 
+ div.product-info-header {
+     border-bottom: 1px solid #eaeaea;
+     padding-bottom: 0;
+     margin-bottom: 25px;
+ }
+ 
+ div.product-info-header h1 {
+     font-size: 27px;
+     text-transform: uppercase;
+     font-weight: 700;
+ }
+ 
+ div.product-info-header .price {
+     margin-bottom: 0;
+     font-size: 28px;
+ }
+ 
+ div.product-info-footer a.link-button {
+     width: 144px;
+     padding: 10px;
+     color: #fff;
+     font-size: 15px;
+     margin: 49px auto;
+     background-color: green;
+ }
+ 
+ div.product-info-footer a.link-button:hover {
+     background-color: #336d33;
+ }
+ /* RADIO BUTTONS */
+ 
+ .radio {
+     margin: 0.5rem;
+ }
+ 
+ .radio input[type="radio"] {
+     position: absolute;
+     opacity: 0;
+ }
+ 
+ .radio input[type="radio"]+.radio-label:before {
+     content: '';
+     background: #f4f4f4;
+     border-radius: 100%;
+     border: 1px solid #b4b4b4;
+     display: inline-block;
+     width: 1.4em;
+     height: 1.4em;
+     position: relative;
+     top: -0.2em;
+     margin-right: 1em;
+     vertical-align: top;
+     cursor: pointer;
+     text-align: center;
+     transition: all 250ms ease;
+ }
+ 
+ .radio input[type="radio"]:checked+.radio-label:before {
+     background-color: #70c767;
+     box-shadow: inset 0 0 0 4px #f4f4f4;
+ }
+ 
+ .radio input[type="radio"]:focus+.radio-label:before {
+     outline: none;
+     border-color: #3197EE;
+ }
+ 
+ .radio input[type="radio"]:disabled+.radio-label:before {
+     box-shadow: inset 0 0 0 4px #f4f4f4;
+     border-color: #b4b4b4;
+     background: #b4b4b4;
+ }
+ 
+ .radio input[type="radio"]+.radio-label:empty:before {
+     margin-right: 0;
+ }
+ 
+ .radio-label {
+     font-size: 18px;
+     font-size: 13px;
+     text-transform: uppercase;
+     font-weight: bold !important;
+ }
+ 
+ div.not-found {
+     width: 930px;
+     margin: 10px auto;
+     padding: 12px;
+ }
+ 
+ div.not-found h3 {
+     font-size: 30px;
+     text-align: center;
+     font-weight: bold;
+     text-transform: uppercase;
+ }
+ 
+ p.link a,
+ .submit-btn {
+     background-color: #448AFF;
+     color: #fff;
+     font-size: 14px;
+     text-transform: uppercase;
+     border-radius: 6px;
+     /* padding-right: 16px; */
+     /* padding-left: 28px; */
+     /* padding-top: 17px; */
+     /* padding-bottom: 17px; */
+     padding: 11px 12px;
+     border: 1px solid #fff;
+     transition: background-color 1s;
+ }
+ 
+ div.not-found p.link a:hover,
+ .submit-btn:hover {
+     background-color: #40C4FF;
+ }
+ 
+ .border-button {
+     padding-bottom: 4px;
+     color: #000;
+     text-transform: uppercase;
+     padding-left: 7px;
+     padding-right: 7px;
+     color: #000;
+     font-weight: 400;
+     border: 1px solid #000;
+ }
+ 
+ .border-button:hover {
+     color: #000;
+     font-weight: bold;
+     border: 1px solid #000;
+ }
+ 
+ .btn-small {
+     font-size: 12px !important;
+     padding-right: 21px !important;
+     padding-left: 21px !important;
+     padding-top: 10px !important;
+     padding-bottom: 10px !important;
+ }
+ 
+ div.not-found p.link {
+     text-align: center;
+     margin-top: 37px;
+     border-top: 2px solid #e8e8e8;
+     padding: 28px;
+ }
+ /* Styling the header of the result page */
+ 
+ div.result-header {
+     text-align: center;
+ }
+ 
+ div.result-header h1.title {
+     font-size: 40px;
+     font-weight: bold;
+     margin-bottom: 20px;
+ }
+ 
+ div.result-header p.sub-title {
+     text-align: center;
+     font-size: 17px;
+ }
+ 
+ div.right-part input[type="text"],
+ div.right-part input[type="tel"],
+ div.right-part input[type="email"] {
+     margin-bottom: 7px;
+ }
+ 
+ .horizontal-radio {
+     display: table-cell !important;
+ }
+ 
+ .horizontal-radio label {
+     padding-left: 0px !important;
+     padding-right: 14px;
+ }
+ 
+ .additional-section {
+     text-align: center;
+     width: 100%;
+     border: 1px solid white;
+     min-height: 258px;
+     padding: 25px;
+     margin-bottom: 20px;
+     margin-top: -16px;
+     box-shadow: 2px 1px 5px 2px rgba(1, 2, 2, 0.22), 0 1px 0px 0 rgba(27, 19, 19, 0);
+ }
+ 
+ .hide {
+     display: none;
+ }
+ 
+ div.feedback {
+     background-color: #f1f1f1;
+     padding: 30px;
+     text-align: center;
+ }
+ 
+ div.feedback h3 {
+     text-transform: uppercase;
+     text-align: center;
+ }
+ 
+ .radio,
+ .radio__label,
+ .radio__label:after,
+ .radio__label:before {
+     box-sizing: border-box;
+ }
+ 
+ .radio__container:nth-child(1) {
+     padding-bottom: 35px;
+     margin-bottom: 28px;
+     border-bottom: 1px dotted #dbdbdb;
+ }
+ 
+ .radio__container .radio-inline {
+     display: inline-block;
+     margin-right: 10px;
+ }
+ 
+ .radio__container .radio {
+     display: inline;
+     opacity: 0;
+     width: 0;
+     margin: 0;
+     overflow: hidden;
+     -webkit-appearance: none;
+ }
+ 
+ .radio__container .radio__label {
+     display: inline-block;
+     height: 50px;
+     position: relative;
+     padding: 15px 10px 15px 28px;
+     cursor: pointer;
+     vertical-align: bottom;
+     color: rgba(0, 0, 0, 0.54);
+     font: 300 14px/20px Helvetica, Arial, sans-serif;
+     transition: color 200ms ease;
+ }
+ 
+ .radio__container .radio__label:before,
+ .radio__container .radio__label:after {
+     position: absolute;
+     content: "";
+     border-radius: 50%;
+     transition: border-color 200ms ease, -webkit-transform 200ms ease;
+     transition: transform 200ms ease, border-color 200ms ease;
+     transition: transform 200ms ease, border-color 200ms ease, -webkit-transform 200ms ease;
+ }
+ 
+ .radio__container .radio__label:before {
+     left: 0;
+     top: 15px;
+     width: 20px;
+     height: 20px;
+     border: 2px solid #00b9eb;
+ }
+ 
+ .radio__container .radio__label:after {
+     top: 20px;
+     left: 5px;
+     width: 10px;
+     height: 10px;
+     -webkit-transform: scale(0);
+     transform: scale(0);
+     background-color: #3c91e6;
+ }
+ 
+ .radio__container .radio__label:hover {
+     color: #3c91e6;
+ }
+ 
+ .radio__container .radio__label:hover:before {
+     border-color: #fb872b;
+ }
+ 
+ .radio__container .radio:checked+.radio__label {
+     color: rgba(0, 0, 0, 0.87);
+ }
+ 
+ .radio__container .radio:checked+.radio__label:before {
+     border-color: #3c91e6;
+ }
+ 
+ .radio__container .radio:checked+.radio__label:after {
+     -webkit-transform: scale(1);
+     transform: scale(1);
+ }
+ /* Front End Form Styling */
+ 
+ @import url('https://fonts.googleapis.com/css?family=Montserrat');
+ .flex-container {
+     display: flex;
+     background-color: rgba(255, 255, 255, 0.69);
+     flex-flow: column wrap;
+     padding: 16px;
+     border-radius: 5px;
+     -webkit-box-shadow: -1px 0px 17px 3px rgba(199, 189, 199, 1);
+     -moz-box-shadow: -1px 0px 17px 3px rgba(199, 189, 199, 1);
+     box-shadow: -1px 0px 17px 3px rgba(199, 189, 199, 1);
+     /* border-top: 3px solid #190101; */
+     /* border-top-left-radius: 10px; */
+     /* border-bottom: 3px solid #000; */
+     /* border-bottom-right-radius: 10px; */
+ }
+ 
+ .flex-section {
+     display: flex;
+     flex-flow: column wrap;
+     padding: 2px;
+     margin-bottom: 31px;
+     width: 100%;
+     margin: 10px auto;
+     padding: 36px;
+     border: 3px solid #efefef;
+     justify-content: center;
+ }
+ 
+ .left-pane {
+     margin-bottom: 16px;
+ }
+ 
+ .left-pane h2 {
+     font-weight: 900;
+     font-size: 21px;
+     text-transform: uppercase;
+     border-bottom: 2px solid #000;
+     padding: 7px;
+     font-family: 'Montserrat', sans-serif;
+ }
+ 
+ div.description {
+     font-family: 'Montserrat', sans-serif;
+     font-size: 1.1em;
+ }
+ 
+ .right-pane {
+     /* align-self: stretch; */
+     padding: 32px;
+     /* display: flex; */
+     /* justify-content: space-evenly; */
+     flex-flow: row wrap;
+     background-color: rgb(255, 255, 255);
+     border-radius: 10px;
+     margin-top: 0;
+     /* align-items: center; */
+     background: ghostwhite;
+     font-family: 'Montserrat', sans-serif;
+     font-size: 1em;
+ }
